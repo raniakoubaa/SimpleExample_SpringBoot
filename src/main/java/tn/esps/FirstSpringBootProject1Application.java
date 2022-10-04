@@ -35,44 +35,6 @@ public class FirstSpringBootProject1Application implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("Hello Spring ******************");
 
-		
-
-		/*  Compte c4 = em.find(Compte.class, 5L); System.out.println(c4); Compte c5 =
-		  em.find(Compte.class, 4L); System.out.println(c5);
-		  c4.setSolde(c4.getSolde()+50); em.merge(c4); System.out.println(c4);
-		 */
-
-		/* DAO */
-
-		//Compte c9 = new Compte(100, "karim");
-		// compteDao.save(c9); 
-		//c9.setSolde(250);
-		// compteDao.update(c9);
-		// compteDao.delete(11L);
-		// find all
-		/*List<Compte> list = new ArrayList<>();
-		list = compteDao.findAll();
-		for (Compte compte : list) { 
-			System.out.println(compte);
-		}
-		System.out.println("**************************");
-		// Find by Rib
-		System.out.println("le compte du rib 7 est = " + compteDao.findByRib(7L));*/
-		
-		
-		//client
-		
-		//clientDao.save(c);
-		
-		/*List<Client> l = new ArrayList<>();
-		l = clientDao.findAll();
-		for (Client client : l) { 
-			System.out.println(client);
-		}*/
-		System.out.println("**************************");
-		
-		// Find by cin
-		//System.out.println("le client du rib 1 est = " + clientDao.findByCin(1L));
 	}
 
 }
