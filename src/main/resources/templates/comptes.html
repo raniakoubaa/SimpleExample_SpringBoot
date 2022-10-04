@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<nav class="navbar navbar-dark bg-dark">
+ <div class="container-fluid">
+    <a class="navbar-brand" href="#">Spring Boot</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="/compte/all">Compte</a>
+        <a class="nav-link" href="/client/all">Client</a>
+      </div>
+    </div>
+  </div>
+</nav>
+	<h1 style="color: blue; margin: 20px;">Ajouter un compte</h1>
+	<form th:action="@{'save2'}" method="POST">
+		<table style="margin-left: 50px; margin-top: 50px;">
+			<tr>
+				<td><b> Solde </td>
+				<td>
+				</td>
+				<td><input type="text" name="solde" />
+			</tr>
+			<tr>
+				<td><b>Client </td>
+				</td>
+				<td>
+				<td><input type="text" name="client" /></td>
+			</tr>
+			<tr>
+				<td></td>
+
+				<td><button type="submit" class="btn btn-primary">save</button></td>
+			</tr>
+
+		</table>
+	</form>
+
+	<hr>
+	<h1 style="color: blue; margin: 20px;">Liste des comptes</h1>
+	<table class="table table-striped" style="margin: 30px;">
+		<thead>
+			<tr>
+				<th>Num</th>
+				<th>Rib</th>
+				<th>Solde</th>
+				<th>Client</th>
+				<th>Action</th>
+				<th>Delete-Ajax</th>
+				<th>Edit</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:id="${compte.rib}" th:each="compte,iterStat : ${comptes}">
+				<td><span th:text="${iterStat.count}">1</span></td>
+				<td th:text="${compte.rib}"></td>
+				<td th:text="${compte.solde}"></td>
+				<td th:text="${compte.client}"></td>
+				<td><a th:href="@{'/compte/delete/'+${compte.rib}}">Delete</a></td>
+				<td><a th:href="|javascript:deleteCompte(${compte.rib})|">Delete-Ajax</a></td>
+				<td><form th:action="@{'load'}" method="POST">
+						<input type="hidden" name="rib" th:value="${compte.rib}">
+						<button type="submit" class="btn btn-success">Edit</button>
+					</form></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script src="../js/bootstrap.bundle.min.js"></script>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script src="../js/sweetalert.min.js"></script>
+	<script src="../js/compte.js"></script>
+</html>

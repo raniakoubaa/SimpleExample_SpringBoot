@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<nav class="navbar navbar-dark bg-dark">
+ <div class="container-fluid">
+    <a class="navbar-brand" href="#">Spring Boot</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="/compte/all">Compte</a>
+        <a class="nav-link" href="/client/all">Client</a>
+      </div>
+    </div>
+  </div>
+</nav>
+	<h1 style="color: blue; margin: 20px;">Ajouter un client</h1>
+	<form th:action="@{'save'}" method="POST">
+		<table style="margin-left: 50px; margin-top: 50px;">
+			<tr>
+				<td><b> Nom </td>
+				<td>
+				</td>
+				<td><input type="text" name="nom" />
+			</tr>
+			<tr>
+				<td><b>Prenom </td>
+				</td>
+				<td>
+				<td><input type="text" name="prenom" /></td>
+			</tr>
+			<tr>
+				<td></td>
+
+				<td><button type="submit" class="btn btn-primary">save</button></td>
+			</tr>
+
+		</table>
+	</form>
+
+	<hr>
+	<h1 style="color: blue; margin: 20px;">Liste des clients</h1>
+	<table class="table table-striped" style="margin: 30px;">
+		<thead>
+			<tr>
+				<th>Num</th>
+				<th>cin</th>
+				<th>Nom</th>
+				<th>Prenom</th>
+				<th>Delete</th>
+				<th>Edit</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:id="${client.cin}" th:each="client,iterStat : ${clients}">
+				<td><span th:text="${iterStat.count}">1</span></td>
+				<td th:text="${client.cin}"></td>
+				<td th:text="${client.nom}"></td>
+				<td th:text="${client.prenom}"></td>
+				<td><a th:href="@{'/client/delete/'+${client.cin}}">Delete</a></td>
+				<td><a th:href="|javascript:deleteClient(${client.cin})|">Delete-Ajax</a></td>
+				<td><form th:action="@{'load'}" method="POST">
+						<input type="hidden" name="cin" th:value="${client.cin}">
+						<button type="submit" class="btn btn-success">Edit</button>
+					</form></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script src="../js/bootstrap.bundle.min.js"></script>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script src="../js/sweetalert.min.js"></script>
+	<script src="../js/client.js"></script>
+</html>
